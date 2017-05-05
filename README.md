@@ -1,0 +1,1 @@
+# valet-gen-sql
