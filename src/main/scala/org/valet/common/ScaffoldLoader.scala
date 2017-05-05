@@ -6,9 +6,6 @@ import com.typesafe.config.{Config, ConfigFactory}
 
 import scala.collection.JavaConversions._
 
-/**
-  * Created by keigo on 2017/04/11.
-  */
 object ScaffoldLoader extends ScaffoldConsts {
 
   def getKeyListFromHocon(filePath: String, hoconPath: Option[String]): Seq[String] = {

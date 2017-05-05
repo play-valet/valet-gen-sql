@@ -1,4 +1,4 @@
-# griff-gen-sql
+# valet-gen-sql
 
 ### description
-sbt project. codegen sql from hocon file
+gen migration sql files.
