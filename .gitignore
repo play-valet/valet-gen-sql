@@ -8,6 +8,7 @@ target
 /.settings
 /RUNNING_PID
 /app
-/webtools
-/webtools.conf
 /conf
+
+valet
+valet.conf
