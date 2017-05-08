@@ -1,4 +1,3 @@
 # valet-gen-sql
 
-### description
-gen migration sql files.
+https://github.com/valet-org/valet
