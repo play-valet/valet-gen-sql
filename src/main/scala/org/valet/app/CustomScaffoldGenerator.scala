@@ -2,8 +2,8 @@ package org.valet.app
 
 import java.io.File
 
+import common.ConfTableColumn
 import org.joda.time.DateTime
-import org.valet.common.ScaffoldTableColumn
 import skinny.task.generator.ScaffoldGenerator
 
 object CustomScaffoldGenerator extends ScaffoldGenerator {
@@ -20,7 +20,7 @@ object CustomScaffoldGenerator extends ScaffoldGenerator {
 
   //  override def resourceDir = "src/main"
 
-  def customGenerateMigrationSQL(resources: String, resource: String, newArgs: Seq[ScaffoldTableColumn], dirPath: String, num: Int) {
+  def customGenerateMigrationSQL(resources: String, resource: String, newArgs: Seq[ConfTableColumn], dirPath: String, num: Int) {
     val version: Long = DateTime.now.getMillis + (num * 100)
     val file: File = {
       val filepath = {
@@ -33,7 +33,7 @@ object CustomScaffoldGenerator extends ScaffoldGenerator {
     writeIfAbsent(file, sql)
   }
 
-  def customMigrationSQL(resources: String, resource: String, srcCols: Seq[ScaffoldTableColumn]): String = {
+  def customMigrationSQL(resources: String, resource: String, srcCols: Seq[ConfTableColumn]): String = {
     val name = tableName.getOrElse(toSnakeCase(resources))
     val columns = srcCols.map { a =>
 

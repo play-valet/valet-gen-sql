@@ -1,14 +1,14 @@
-package org.valet.common
+package common
 
-import java.io.File
+import java.io.{File, IOException}
+import java.net.URL
 import java.nio.charset.Charset
 
 import org.apache.commons.io.FileUtils
-import skinny.util.StringUtil
 
 import scala.sys.process._
 
-object ScUtils {
+trait Utility {
 
   def charset: Charset = Charset.defaultCharset()
 
@@ -65,17 +65,21 @@ object ScUtils {
     }
   }
 
-  def cli(command: String) = {
+  def cli(command: String): Int = {
     command.!
   }
 
-  def echoErrorMsg(e: String) = {
+  def echoErrorMsg(e: String): Unit = {
     System.out.println(
       s"""
          |-- ERROR OCCURRED --
-         |${e}
+         |$e
           """.stripMargin
     )
+  }
+
+  def makeFileIfNotExist(file: File): Unit = {
+    file.createNewFile()
   }
 
   def writeIfAbsent(file: File, code: String) {
@@ -110,5 +114,26 @@ object ScUtils {
     }
   }
 
+  def getDirFileList(dir: String, result: Seq[java.io.File]): Seq[java.io.File] = {
+    val list: Seq[java.io.File] = new java.io.File(dir).listFiles.toSeq
+    list.flatMap { x =>
+      if (x.isDirectory) {
+        getDirFileList(x.getPath, list)
+      } else {
+        result.:+(x)
+      }
+    }.distinct.sortBy(f => f.toString)
+  }
+
+  def isActiveInternet: Boolean = {
+    try {
+      val url = new URL("http://google.com")
+      val con = url.openConnection
+      con.getInputStream
+      true
+    } catch {
+      case _: IOException => false
+    }
+  }
 
 }

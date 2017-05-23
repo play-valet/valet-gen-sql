@@ -3,10 +3,10 @@ package org.valet.app
 import java.io.File
 
 import com.typesafe.config.{Config, ConfigFactory}
-import org.valet.common.{ScUtils, ScaffoldLoader, ScaffoldTable}
+import common.{Loaders, ValetUtility}
 import skinny.task.generator.{ScaffoldGeneratorArg, ScaffoldSspGenerator}
 
-object Launcher {
+object Launcher extends ValetUtility {
 
   def main(args: Array[String]) {
     args.toList match {
@@ -33,27 +33,27 @@ object Launcher {
 
     completedArgs match {
       case ns :: rs :: r :: attributes =>
-        val (namespaces, resources, resource) = (ns.split('.'), ScUtils.toFirstCharLower(rs), ScUtils.toFirstCharLower(r))
+        val (namespaces, resources, resource) = (ns.split('.'), toFirstCharLower(rs), toFirstCharLower(r))
         val errorList = getErrorList(attributes)
         errorList.isEmpty match {
           case true  => CustomScaffoldGenerator.generateMigrationSQL(resources, resource, getGeneratorArgs(attributes), withId)
-          case false => ScUtils.echoErrorMsg(errorList.mkString("\n"))
+          case false => echoErrorMsg(errorList.mkString("\n"))
         }
-      case _                           => ScUtils.echoErrorMsg("invalid args")
+      case _                           => echoErrorMsg("invalid args")
     }
   }
 
   def runHocon(filepath: String): Unit = {
     println(s"config file = $filepath");
     val conf: Config = ConfigFactory.parseFile(new File(filepath))
-    val confDto = ScaffoldLoader.getConfDto(conf)
-    val list: Seq[ScaffoldTable] = confDto.tableTableList
+    val confDto = Loaders.getConfDto(conf)
+    val list = confDto.tableTableList
     for ((tbl, num) <- list.zipWithIndex) {
       val errorList = getErrorList(tbl.columnList.map(col => col.cName + ":" + col.cType).toList)
       if (errorList.nonEmpty) {
-        ScUtils.echoErrorMsg(errorList.mkString("\n"))
+        echoErrorMsg(errorList.mkString("\n"))
       } else {
-        CustomScaffoldGenerator.customGenerateMigrationSQL(tbl.tableName, tbl.tableName, tbl.columnList, confDto.outputPathMigration, num)
+        CustomScaffoldGenerator.customGenerateMigrationSQL(tbl.tableName, tbl.tableName, tbl.columnList, confDto.modulesDbmigrationPathMigration, num)
       }
     }
   }
