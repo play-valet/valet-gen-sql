@@ -7,8 +7,6 @@ import com.typesafe.config.{Config, ConfigFactory}
 import scala.collection.JavaConversions._
 import scala.meta._
 
-
-
 object Loaders extends Utility {
 
   def getKeyListFromHocon(filePath: String, hoconPath: Option[String]): Seq[String] = {

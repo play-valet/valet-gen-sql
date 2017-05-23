@@ -11,6 +11,7 @@ lazy val root = (project in file("."))
       "org.skinny-framework" %% "skinny-task" % "2.3.5",
       "joda-time" % "joda-time" % "2.9.7",
       "org.joda" % "joda-convert" % "1.8.1",
-      "org.scalikejdbc" % "scalikejdbc-core_2.11" % "2.5.1"
+      "org.scalikejdbc" % "scalikejdbc-core_2.11" % "2.5.1",
+      "org.scalameta" %% "scalameta" % "1.6.0"
     )
   )
