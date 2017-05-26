@@ -11,7 +11,7 @@ object Launcher extends ValetUtility {
   def main(args: Array[String]) {
     args.toList match {
       case name :: params if name == "cli"     => runCl(params, withId = true)
-      case name :: params if name == "hocon"   => runHocon(params.headOption.getOrElse(new File(".").getCanonicalPath + "/webtools.conf"))
+      case name :: params if name == "hocon"   => runHocon(params.headOption.getOrElse(new File(".").getCanonicalPath + "/valet.conf"))
       case name :: params if name == "cli-all" => runClAll(params)
       case _                                   => showUsage()
     }
@@ -53,7 +53,7 @@ object Launcher extends ValetUtility {
       if (errorList.nonEmpty) {
         echoErrorMsg(errorList.mkString("\n"))
       } else {
-        CustomScaffoldGenerator.customGenerateMigrationSQL(tbl.tableName, tbl.tableName, tbl.columnList, confDto.modulesDbmigrationPathMigration, num)
+        CustomScaffoldGenerator.customGenerateMigrationSQL(tbl.tableName, tbl.tableName, tbl.columnList, confDto.modulesRequiredDbmigrationPathMigration, num)
       }
     }
   }
@@ -63,7 +63,7 @@ object Launcher extends ValetUtility {
       s"""
          | Usage:
          |        sbt "run cli members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]"
-         |        sbt "run hocon $$(pwd)/webtools.conf"
+         |        sbt "run hocon $$(pwd)/valet.conf"
        """.stripMargin
     )
   }
