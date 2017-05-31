@@ -1,4 +1,4 @@
-package common
+package org.valet.common
 
 import java.util.Locale.ENGLISH
 

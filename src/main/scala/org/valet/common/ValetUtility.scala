@@ -1,4 +1,4 @@
-package common
+package org.valet.common
 
 trait ValetUtility extends Utility with ValetConst {
 

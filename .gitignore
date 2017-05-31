@@ -10,5 +10,5 @@ target
 /app
 /conf
 
-valet
-valet.conf
+/valet
+/valet.conf

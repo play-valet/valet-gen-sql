@@ -1,12 +1,13 @@
-package org.valet.app
+package org.valet
 
 import java.io.File
 
 import com.typesafe.config.{Config, ConfigFactory}
-import common.{Loaders, ValetUtility}
+import org.valet.app.CustomScaffoldGenerator
+import org.valet.common.{Loaders, ValetUtility}
 import skinny.task.generator.{ScaffoldGeneratorArg, ScaffoldSspGenerator}
 
-object Launcher extends ValetUtility {
+object SqlGenLauncher extends ValetUtility {
 
   def main(args: Array[String]) {
     args.toList match {

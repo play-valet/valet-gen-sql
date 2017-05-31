@@ -1,6 +1,6 @@
-package common
+package org.valet.common
 
-import common.Loaders.ConfDto
+import org.valet.common.Loaders.ConfDto
 
 case class ScaffoldDtos(
                          confDto: ConfDto,

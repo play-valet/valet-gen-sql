@@ -2,8 +2,8 @@ package org.valet.app
 
 import java.io.File
 
-import common.ConfTableColumn
 import org.joda.time.DateTime
+import org.valet.common.ConfTableColumn
 import skinny.task.generator.ScaffoldGenerator
 
 object CustomScaffoldGenerator extends ScaffoldGenerator {

@@ -1,4 +1,4 @@
-package common
+package org.valet.common
 
 import java.io.{BufferedReader, File, FileInputStream, InputStreamReader}
 
@@ -95,9 +95,8 @@ object Loaders extends Utility {
     modulesRequiredDbmigrationPathMigration = conf.getString("scaffold.modules.required.dbmigration.path.migration"),
     modulesRequiredSlickcodegenIsUse = conf.getString("scaffold.modules.required.slickcodegen.isUse"),
     modulesRequiredSlickcodegenLibrary = conf.getString("scaffold.modules.required.slickcodegen.library"),
-    modulesRequiredVcInterfaceDtoName = conf.getString("scaffold.modules.required.vcInterface.dtoName"),
-    modulesRequiredVcInterfaceIsUse = conf.getString("scaffold.modules.required.vcInterface.isUse"),
-    modulesRequiredVcInterfaceLibrary = conf.getString("scaffold.modules.required.vcInterface.library"),
+    modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerIsUse = conf.getString("scaffold.modules.twirlScaffoldThemes.SingleDtoBetweenViewAndController.isUse"),
+    modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerName = conf.getString("scaffold.modules.twirlScaffoldThemes.SingleDtoBetweenViewAndController.name"),
     modulesTwirlScaffoldThemesEnableList = conf.getStringList("scaffold.modules.twirlScaffoldThemes.enableList"),
     modulesTwirlScaffoldThemesIsUse = conf.getString("scaffold.modules.twirlScaffoldThemes.isUse"),
     modulesTwirlScaffoldThemesSourceAccount = conf.getString("scaffold.modules.twirlScaffoldThemes.source.account"),
@@ -137,9 +136,8 @@ object Loaders extends Utility {
                       modulesRequiredDbmigrationPathMigration : String,
                       modulesRequiredSlickcodegenIsUse : String,
                       modulesRequiredSlickcodegenLibrary : String,
-                      modulesRequiredVcInterfaceDtoName : String,
-                      modulesRequiredVcInterfaceIsUse : String,
-                      modulesRequiredVcInterfaceLibrary : String,
+                      modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerIsUse : String,
+                      modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerName : String,
                       modulesTwirlScaffoldThemesEnableList : Seq[String],
                       modulesTwirlScaffoldThemesIsUse : String,
                       modulesTwirlScaffoldThemesSourceAccount : String,
