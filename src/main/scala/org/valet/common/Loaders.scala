@@ -7,6 +7,8 @@ import com.typesafe.config.{Config, ConfigFactory}
 import scala.collection.JavaConversions._
 import scala.meta._
 
+
+
 object Loaders extends Utility {
 
   def getKeyListFromHocon(filePath: String, hoconPath: Option[String]): Seq[String] = {
@@ -77,8 +79,8 @@ object Loaders extends Utility {
     generalOutputPathDao = conf.getString("scaffold.general.output.path.dao"),
     generalOutputPathForm = conf.getString("scaffold.general.output.path.form"),
     generalOutputPathService = conf.getString("scaffold.general.output.path.service"),
+    generalOutputPathSlickTables = conf.getString("scaffold.general.output.path.slick.tables"),
     generalOutputPathView = conf.getString("scaffold.general.output.path.view"),
-    generalSlickPathTables = conf.getString("scaffold.general.slick.path.tables"),
     modulesAuthIsUse = conf.getString("scaffold.modules.auth.isUse"),
     modulesAuthLibrary = conf.getString("scaffold.modules.auth.library"),
     modulesAuthRoleList = conf.getStringList("scaffold.modules.auth.roleList"),
@@ -92,18 +94,17 @@ object Loaders extends Utility {
     modulesI18nMessageConfIsUse = conf.getString("scaffold.modules.i18nMessageConf.isUse"),
     modulesRequiredDbmigrationIsUse = conf.getString("scaffold.modules.required.dbmigration.isUse"),
     modulesRequiredDbmigrationLibrary = conf.getString("scaffold.modules.required.dbmigration.library"),
-    modulesRequiredDbmigrationPathMigration = conf.getString("scaffold.modules.required.dbmigration.path.migration"),
+    modulesRequiredDbmigrationPath = conf.getString("scaffold.modules.required.dbmigration.path"),
     modulesRequiredSlickcodegenIsUse = conf.getString("scaffold.modules.required.slickcodegen.isUse"),
     modulesRequiredSlickcodegenLibrary = conf.getString("scaffold.modules.required.slickcodegen.library"),
-    modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerIsUse = conf.getString("scaffold.modules.twirlScaffoldThemes.SingleDtoBetweenViewAndController.isUse"),
-    modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerName = conf.getString("scaffold.modules.twirlScaffoldThemes.SingleDtoBetweenViewAndController.name"),
     modulesTwirlScaffoldThemesEnableList = conf.getStringList("scaffold.modules.twirlScaffoldThemes.enableList"),
     modulesTwirlScaffoldThemesIsUse = conf.getString("scaffold.modules.twirlScaffoldThemes.isUse"),
+    modulesTwirlScaffoldThemesModulesResultDtoIsUse = conf.getString("scaffold.modules.twirlScaffoldThemes.modules.resultDto.isUse"),
+    modulesTwirlScaffoldThemesModulesResultDtoName = conf.getString("scaffold.modules.twirlScaffoldThemes.modules.resultDto.name"),
     modulesTwirlScaffoldThemesSourceAccount = conf.getString("scaffold.modules.twirlScaffoldThemes.source.account"),
     modulesTwirlScaffoldThemesSourceBackendAdmin = conf.getString("scaffold.modules.twirlScaffoldThemes.source.backend.admin"),
     modulesTwirlScaffoldThemesSourceFrontBlog = conf.getString("scaffold.modules.twirlScaffoldThemes.source.front.blog"),
     modulesTwirlScaffoldThemesSourceFrontCorporate = conf.getString("scaffold.modules.twirlScaffoldThemes.source.front.corporate"),
-    modulesTwirlScaffoldThemesSourceFrontStatusErrors = conf.getString("scaffold.modules.twirlScaffoldThemes.source.front.statusErrors"),
     tableTableList = getConfTable(conf).get) }
   case class ConfDto(
                       dbDb : String,
@@ -118,8 +119,8 @@ object Loaders extends Utility {
                       generalOutputPathDao : String,
                       generalOutputPathForm : String,
                       generalOutputPathService : String,
+                      generalOutputPathSlickTables : String,
                       generalOutputPathView : String,
-                      generalSlickPathTables : String,
                       modulesAuthIsUse : String,
                       modulesAuthLibrary : String,
                       modulesAuthRoleList : Seq[String],
@@ -133,18 +134,17 @@ object Loaders extends Utility {
                       modulesI18nMessageConfIsUse : String,
                       modulesRequiredDbmigrationIsUse : String,
                       modulesRequiredDbmigrationLibrary : String,
-                      modulesRequiredDbmigrationPathMigration : String,
+                      modulesRequiredDbmigrationPath : String,
                       modulesRequiredSlickcodegenIsUse : String,
                       modulesRequiredSlickcodegenLibrary : String,
-                      modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerIsUse : String,
-                      modulesTwirlScaffoldThemesSingleDtoBetweenViewAndControllerName : String,
                       modulesTwirlScaffoldThemesEnableList : Seq[String],
                       modulesTwirlScaffoldThemesIsUse : String,
+                      modulesTwirlScaffoldThemesModulesResultDtoIsUse : String,
+                      modulesTwirlScaffoldThemesModulesResultDtoName : String,
                       modulesTwirlScaffoldThemesSourceAccount : String,
                       modulesTwirlScaffoldThemesSourceBackendAdmin : String,
                       modulesTwirlScaffoldThemesSourceFrontBlog : String,
                       modulesTwirlScaffoldThemesSourceFrontCorporate : String,
-                      modulesTwirlScaffoldThemesSourceFrontStatusErrors : String,
                       tableTableList : Seq[ConfTable])
 
 
@@ -169,7 +169,7 @@ object Loaders extends Utility {
   }
 
   def getSlickTableList(setting: ConfDto): Seq[GeneratedTable] = {
-    val modelpath = setting.generalSlickPathTables
+    val modelpath = setting.generalOutputPathSlickTables
     val inBuffer = new BufferedReader(new InputStreamReader(new FileInputStream(modelpath), "UTF-8"))
     val lines = Iterator.continually(inBuffer.readLine()).takeWhile(_ != null).toList
     (for ((line, lineNum) <- lines.zipWithIndex) yield line.replaceAll("^\\s*", ""))

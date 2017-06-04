@@ -54,7 +54,7 @@ object SqlGenLauncher extends ValetUtility {
       if (errorList.nonEmpty) {
         echoErrorMsg(errorList.mkString("\n"))
       } else {
-        CustomScaffoldGenerator.customGenerateMigrationSQL(tbl.tableName, tbl.tableName, tbl.columnList, confDto.modulesRequiredDbmigrationPathMigration, num)
+        CustomScaffoldGenerator.customGenerateMigrationSQL(tbl.tableName, tbl.tableName, tbl.columnList, confDto.modulesRequiredDbmigrationPath, num)
       }
     }
   }
